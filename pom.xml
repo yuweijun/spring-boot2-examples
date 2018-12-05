@@ -26,6 +26,7 @@
         <module>spring-boot2-webflux</module>
         <module>spring-boot2-reactive-security</module>
         <module>spring-boot2-reactive-functional</module>
+        <module>spring-boot2-functional-hello-world</module>
     </modules>
 
     <build>
