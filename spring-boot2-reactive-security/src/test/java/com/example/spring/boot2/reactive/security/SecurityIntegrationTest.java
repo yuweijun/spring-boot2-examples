@@ -1,7 +1,6 @@
 package com.example.spring.boot2.reactive.security;
 
 
-import com.example.spring.boot2.SpringBoot2WebFluxApplication;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,7 +14,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = SpringBoot2WebFluxApplication.class)
+@ContextConfiguration(classes = SpringSecurity5Application.class)
 public class SecurityIntegrationTest {
 
     @Autowired
@@ -39,4 +38,5 @@ public class SecurityIntegrationTest {
     public void whenHasCredentials_thenSeesGreeting() {
         this.rest.get().uri("/").exchange().expectStatus().isOk().expectBody(String.class).isEqualTo("Hello, user");
     }
+
 }
