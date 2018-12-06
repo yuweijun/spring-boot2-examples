@@ -1,4 +1,4 @@
-package com.example.spring.boot2.webflux;
+package com.example.spring.boot2.webflux.webclient;
 
 import com.google.gson.Gson;
 import org.springframework.http.MediaType;
@@ -20,6 +20,7 @@ import java.util.Map;
 public class HttpBinRequest {
 
     WebClient webClient = WebClient.create("https://httpbin.org");
+
     @Resource
     private Gson gson;
 

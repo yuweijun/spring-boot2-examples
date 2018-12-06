@@ -1,4 +1,4 @@
-package com.example.spring.boot2.webflux;
+package com.example.spring.boot2.webflux.websocket;
 
 import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClient;

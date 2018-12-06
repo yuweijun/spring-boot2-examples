@@ -26,8 +26,11 @@ public class EmployeeWebSecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.csrf()
-                .disable()
+        http.csrf().disable()
+                // .authorizeExchange()
+                // .pathMatchers("/actuator/**")
+                // .permitAll()
+                // .and()
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.POST, "/employees/update")
                 .hasRole("ADMIN")
@@ -42,4 +45,5 @@ public class EmployeeWebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

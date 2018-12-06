@@ -1,4 +1,4 @@
-package com.example.spring.boot2.webflux;
+package com.example.spring.boot2.webflux.websocket;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,4 +1,4 @@
-package com.example.spring.boot2.webflux;
+package com.example.spring.boot2.webflux.mvc;
 
 import com.example.spring.boot2.commons.model.Employee;
 import com.example.spring.boot2.commons.repository.EmployeeRepository;

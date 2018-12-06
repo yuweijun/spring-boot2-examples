@@ -15,7 +15,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringBoot2WebFluxApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = SpringBoot2WebFluxApplication.class)
 public class ActuatorInfoIntegrationTest {
 
     @Autowired
@@ -23,13 +24,14 @@ public class ActuatorInfoIntegrationTest {
 
     @Test
     public void whenGetInfo_thenReturns200() throws IOException {
-        final ResponseEntity<String> responseEntity = this.restTemplate.getForEntity("/actuator/info", String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity("/actuator/info", String.class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
     @Test
     public void whenFeatures_thenReturns200() throws IOException {
-        final ResponseEntity<String> responseEntity = this.restTemplate.getForEntity("/actuator/features", String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity("/actuator/features", String.class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.spring.boot2.webflux;
+package com.example.spring.boot2.webflux.client;
 
 import com.example.spring.boot2.commons.model.Employee;
 import org.springframework.web.reactive.function.client.WebClient;
