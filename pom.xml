@@ -27,6 +27,8 @@
         <module>spring-boot2-reactive-security</module>
         <module>spring-boot2-reactive-functional</module>
         <module>spring-boot2-functional-hello-world</module>
+        <module>spring-boot2-reactive-mongodb</module>
+        <module>spring-boot2-application-event</module>
     </modules>
 
     <build>

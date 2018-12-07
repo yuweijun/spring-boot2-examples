@@ -1,0 +1,6 @@
+org.springframework.context.ApplicationListener=com.example.spring.boot2.application.event.ApplicationStartingEventListener,\
+com.example.spring.boot2.application.event.ApplicationPreparedEventListener,\
+com.example.spring.boot2.application.event.ApplicationReadyEventListener,\
+com.example.spring.boot2.application.event.ApplicationStartedEventListener,\
+com.example.spring.boot2.application.event.ApplicationContextInitializedEventListener,\
+com.example.spring.boot2.application.event.ApplicationEnvironmentPreparedEventListener

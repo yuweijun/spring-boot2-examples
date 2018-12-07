@@ -32,6 +32,8 @@ public class FunctionalWebApplication {
     }
 
     /**
+     * https://projectreactor.io/docs/netty/release/api/
+     *
      * java.lang.UnsatisfiedLinkError: no netty_transport_native_epoll_x86_64 in java.library.path:
      * [/usr/java/packages/lib, /usr/lib64, /lib64, /lib, /usr/lib]
      *
