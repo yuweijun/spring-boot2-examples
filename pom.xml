@@ -29,6 +29,7 @@
         <module>spring-boot2-functional-hello-world</module>
         <module>spring-boot2-reactive-mongodb</module>
         <module>spring-boot2-application-event</module>
+        <module>spring-boot2-docker-events</module>
     </modules>
 
     <build>
