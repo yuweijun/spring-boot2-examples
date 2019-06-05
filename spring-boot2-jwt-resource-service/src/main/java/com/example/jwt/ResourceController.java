@@ -1,16 +1,14 @@
 package com.example.jwt;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ResourceController {
 
-    private static final String jwtTokenCookieName = "JWT-TOKEN";
+    private static final String JWT_TOKEN_COOKIE_NAME = "JWT-TOKEN";
 
     @GetMapping("/")
     public String home() {
@@ -18,16 +16,13 @@ public class ResourceController {
     }
 
     @GetMapping("/resource")
-    public String resource(HttpServletRequest request, Model model) {
-        // Object username = request.getAttribute("username");
-        // System.out.println("username " + username);
-        // model.addAttribute("username", "test");
+    public String resource() {
         return "resource";
     }
 
     @GetMapping("/logout")
     public String logout(HttpServletResponse httpServletResponse) {
-        CookieUtil.clear(httpServletResponse, jwtTokenCookieName);
+        CookieUtil.clear(httpServletResponse, JWT_TOKEN_COOKIE_NAME);
         return "redirect:/";
     }
 }

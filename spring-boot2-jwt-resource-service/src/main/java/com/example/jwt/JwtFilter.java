@@ -12,6 +12,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     private static final String JWT_TOKEN_COOKIE_NAME = "JWT-TOKEN";
+
     private static final String SIGNING_KEY = "SIGNING_KEY";
 
     @Override

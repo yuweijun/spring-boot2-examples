@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public class JwtUtil {
+    
     public static String generateToken(String signingKey, String subject) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
