@@ -30,6 +30,8 @@
         <module>spring-boot2-reactive-mongodb</module>
         <module>spring-boot2-application-event</module>
         <module>spring-boot2-docker-events</module>
+        <module>spring-boot2-jwt-auth-server</module>
+        <module>spring-boot2-jwt-resource-service</module>
     </modules>
 
     <build>
