@@ -21,24 +21,24 @@ import java.util.List;
 @ToString
 public class Order {
 
-  @Id
-  @GeneratedValue
-  private int id;
+    @Id
+    @GeneratedValue
+    private int id;
 
-  private String description;
+    private String description;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "user_id")
-  private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "coffee_id")
-  private List<Coffee> items;
+    @ManyToMany
+    @JoinTable(name = "t_order_coffee", joinColumns = {@JoinColumn(name = "order_id")})
+    private List<Coffee> coffee;
 
-  @Column(updatable = false)
-  @CreationTimestamp
-  private Date createTime;
+    @Column(updatable = false)
+    @CreationTimestamp
+    private Date createTime;
 
-  @UpdateTimestamp
-  private Date updateTime;
+    @UpdateTimestamp
+    private Date updateTime;
 }

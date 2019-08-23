@@ -18,9 +18,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Coffee implements Serializable {
+    
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
     private String name;
 
