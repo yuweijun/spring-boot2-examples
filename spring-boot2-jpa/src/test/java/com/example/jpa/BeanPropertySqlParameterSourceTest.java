@@ -12,8 +12,9 @@ public class BeanPropertySqlParameterSourceTest {
 
   @Test
   public void test1() {
-    User user = User.builder().age(15).id(1).name("name1").nickName("nickName1").build();
-    Order order = Order.builder().date(new Date()).description("desc").id(1).user(user).build();
+    User user = User.builder().id(1).name("name1").nickName("nickName1").build();
+    Order order = Order.builder().createTime(new Date()).updateTime(new Date())
+        .description("desc").id(1).user(user).build();
 
     BeanPropertySqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(order);
     String[] parameterNames = sqlParameterSource.getParameterNames();
