@@ -11,6 +11,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Table(name = "t_menu")
 @Builder
@@ -20,7 +22,7 @@ import java.util.Date;
 public class Coffee implements Serializable {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     private int id;
 
     private String name;

@@ -2,6 +2,7 @@ package com.example.jpa.controller;
 
 import com.example.jpa.model.Order;
 import com.example.jpa.repository.OrderRepository;
+import com.example.jpa.service.OrderService;
 import com.example.jpa.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class OrderController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping("/")
     public Iterable<Order> list() {
         return orderRepository.findAll();
@@ -42,6 +46,16 @@ public class OrderController {
         }
 
         return null;
+    }
+
+    @GetMapping("/add/{id}")
+    public Order add(@PathVariable int id) {
+        return orderService.findById(id);
+    }
+
+    @GetMapping("/add2/{id}")
+    public Order add2(@PathVariable int id) {
+        return orderService.findById2(id);
     }
 
 }
