@@ -25,8 +25,8 @@
 
 		<logger name="com.example" level="DEBUG"/>
 		<logger name="org.hibernate" level="DEBUG"/>
-		<Root level="info">
+		<AsyncRoot level="info">
 			<AppenderRef ref="Console" />
-		</Root>
+		</AsyncRoot>
 	</Loggers>
 </Configuration>
