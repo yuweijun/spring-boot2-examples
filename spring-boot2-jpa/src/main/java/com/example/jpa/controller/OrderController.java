@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,6 +46,9 @@ public class OrderController {
   @Autowired
   private OrderService orderService;
 
+  @Autowired
+  private EntityManager entityManager;
+
   @GetMapping("/")
   public Iterable<Order> list() {
     Iterable<Order> all = orderRepository.findAll();
@@ -58,15 +62,38 @@ public class OrderController {
 
   @GetMapping("/{id}")
   public Order get(@PathVariable int id) {
+    // test session flush and update in JTA
     userService.update();
 
     Optional<Order> optionalOrder = orderRepository.findById(id);
     if (optionalOrder.isPresent()) {
-      return optionalOrder.get();
+      Order order = optionalOrder.get();
+      // Order$HibernateProxy
+      saveClass(order);
+
+      return order;
     }
 
     return null;
   }
+
+  private void saveClass(Order order) {
+    try {
+      ByteBuddyAgent.install();
+      Class<? extends Order> orderClass = order.getClass();
+
+      ClassFileLocator classFileLocator = ClassFileLocator
+              .AgentBased
+              .fromInstalledAgent(orderClass.getClassLoader());
+      DynamicType.Unloaded<? extends Object> unloaded = new ByteBuddy()
+              .redefine(orderClass, classFileLocator).make();
+      Map<TypeDescription, File> saved = unloaded.saveIn(Files.createTempDirectory("proxy").toFile());
+      saved.forEach((t, u) -> LOGGER.info(u.getAbsolutePath()));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 
   private void saveClass(User user) {
     try {
