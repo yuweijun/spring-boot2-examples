@@ -64,12 +64,14 @@ public class OrderController {
   public Order get(@PathVariable int id) {
     // test session flush and update in JTA
     userService.update();
+    Order reference = entityManager.getReference(Order.class, id);
+    // Order$HibernateProxy
+    saveClass(reference);
 
     Optional<Order> optionalOrder = orderRepository.findById(id);
     if (optionalOrder.isPresent()) {
       Order order = optionalOrder.get();
-      // Order$HibernateProxy
-      saveClass(order);
+      LOGGER.info(order.getClass().getCanonicalName());
 
       return order;
     }
