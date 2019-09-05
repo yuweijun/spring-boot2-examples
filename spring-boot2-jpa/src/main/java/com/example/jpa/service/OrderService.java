@@ -4,6 +4,7 @@ import com.example.jpa.model.Coffee;
 import com.example.jpa.model.Order;
 import com.example.jpa.repository.CoffeeRepository;
 import com.example.jpa.repository.OrderRepository;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,19 @@ public class OrderService {
 
     @Autowired
     private CoffeeRepository coffeeRepository;
+
+    public List<Order> findAll() {
+        return Lists.newArrayList(orderRepository.findAll());
+    }
+
+    public Order findById(int id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            return optionalOrder.get();
+        }
+
+        return null;
+    }
 
     /**
      * <pre>
@@ -154,7 +168,7 @@ public class OrderService {
      * @return order retrieved from db
      */
     @Transactional
-    public Order findById(int id) {
+    public Order addCoffee(int id) {
         Coffee america = Coffee.builder().name("America")
                                .price(20L)
                                .build();
@@ -263,7 +277,7 @@ public class OrderService {
      * @param id orderId
      * @return order
      */
-    public Order findById2(int id) {
+    public Order addCoffee2(int id) {
         Coffee america = Coffee.builder().name("America")
                                .price(20L)
                                .build();
@@ -322,7 +336,7 @@ public class OrderService {
 //     invoke:498, Method (java.lang.reflect)
 //     invoke:309, SharedEntityManagerCreator$SharedEntityManagerInvocationHandler (org.springframework.orm.jpa)
 //     find:-1, $Proxy107 (com.sun.proxy)
-//     findById:274, SimpleJpaRepository (org.springframework.data.jpa.repository.support)
+//     addCoffee:274, SimpleJpaRepository (org.springframework.data.jpa.repository.support)
 //     invoke0:-1, NativeMethodAccessorImpl (sun.reflect)
 //     invoke:62, NativeMethodAccessorImpl (sun.reflect)
 //     invoke:43, DelegatingMethodAccessorImpl (sun.reflect)
@@ -354,12 +368,12 @@ public class OrderService {
 //     invoke:61, SurroundingTransactionDetectorMethodInterceptor (org.springframework.data.repository.core.support)
 //     proceed:186, ReflectiveMethodInvocation (org.springframework.aop.framework)
 //     invoke:212, JdkDynamicAopProxy (org.springframework.aop.framework)
-//     findById:-1, $Proxy112 (com.sun.proxy)
-//     findById2:272, OrderService (com.example.jpa.service)
+//     addCoffee:-1, $Proxy112 (com.sun.proxy)
+//     addCoffee2:272, OrderService (com.example.jpa.service)
 //     invoke:-1, OrderService$$FastClassBySpringCGLIB$$7ae73d44 (com.example.jpa.service)
 //     invoke:218, MethodProxy (org.springframework.cglib.proxy)
 //     intercept:684, CglibAopProxy$DynamicAdvisedInterceptor (org.springframework.aop.framework)
-//     findById2:-1, OrderService$$EnhancerBySpringCGLIB$$481c043a (com.example.jpa.service)
+//     addCoffee2:-1, OrderService$$EnhancerBySpringCGLIB$$481c043a (com.example.jpa.service)
 //     add2:58, OrderController (com.example.jpa.controller)
 //     invoke0:-1, NativeMethodAccessorImpl (sun.reflect)
 //     invoke:62, NativeMethodAccessorImpl (sun.reflect)
