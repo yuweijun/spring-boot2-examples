@@ -22,11 +22,18 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Access(AccessType.FIELD)
   private String name;
 
   private String nickName;
 
   private String mobile;
+
+  @Enumerated(EnumType.STRING)
+  private Experience experience;
+
+  @Embedded
+  private Address address;
 
   @Column(updatable = false)
   @Temporal(TemporalType.DATE)

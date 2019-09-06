@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 这里注解的配置会被 Honey.hbm.xml 文件中的配置覆盖，如果 Honey.hbm.xml 文件配置出错，可能导致程序运行错误
+ *
  * @author Weijun Yu
  * @since 2019-09-05.
  */
@@ -24,14 +26,14 @@ import java.util.Set;
 public class Honey implements Serializable {
 
   @Id
-  @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="honey_seq")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "honey_seq")
   private Integer id;
 
   private String name;
 
   private String taste;
 
-  @OneToMany(mappedBy="honey")
+  @OneToMany(mappedBy = "honey")
   private Set<Bee> bees = new HashSet<>();
 
   @Override
