@@ -1,8 +1,6 @@
 package com.example.jpa.model;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,10 +29,10 @@ public class User {
   private String mobile;
 
   @Column(updatable = false)
-  @CreationTimestamp
+  @Temporal(TemporalType.DATE)
   private Date createTime;
 
-  @UpdateTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
   private Date updateTime;
 }
 
