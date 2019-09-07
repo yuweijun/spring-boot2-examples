@@ -20,12 +20,12 @@ public class InitSessionFactory {
 
   private static SessionFactory sessionFactory;
 
-  public static synchronized SessionFactory getSessionFactory() {
+  public static synchronized SessionFactory getSessionFactory(String config) {
     if (sessionFactory == null) {
       try {
         // 1. Create serviceRegistry using default configuration file : hibernate.cfg.xml
         // serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
-        serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.example.xml").build();
+        serviceRegistry = new StandardServiceRegistryBuilder().configure(config).build();
 
         // 2. Create MetadataSources
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
@@ -46,12 +46,8 @@ public class InitSessionFactory {
     return sessionFactory;
   }
 
-  public static Session openSession() {
-    return getSessionFactory().openSession();
-  }
-
-  public static EntityManager getEntityManager() {
-    EntityManagerFactory entityManagerFactory = getSessionFactory().openSession().getEntityManagerFactory();
+  public static EntityManager getEntityManager(Session session) {
+    EntityManagerFactory entityManagerFactory = session.getEntityManagerFactory();
     return entityManagerFactory.createEntityManager();
   }
 

@@ -23,9 +23,11 @@ public class InitSessionFactoryTest {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(InitSessionFactoryTest.class);
 
+  // private SessionFactory sessionFactory = InitSessionFactory.getSessionFactory("hibernate.cfg.example.xml");
+  private SessionFactory sessionFactory = InitSessionFactory.getSessionFactory("hibernate.cfg.hikari.xml");
+
   @Test
   public void test1() {
-    SessionFactory sessionFactory = InitSessionFactory.getSessionFactory();
     Session session = sessionFactory.openSession();
     Transaction transaction = session.getTransaction();
     transaction.begin();
@@ -43,7 +45,7 @@ public class InitSessionFactoryTest {
     transaction.commit();
     session.close();
 
-    try (Session session2 = InitSessionFactory.openSession()) {
+    try (Session session2 = sessionFactory.openSession()) {
       List<User> students = session2.createQuery("from User", User.class).list();
       students.forEach(s -> LOGGER.info("user nickname is : {}", s.getNickName()));
     } catch (Exception e) {
@@ -61,11 +63,11 @@ public class InitSessionFactoryTest {
     query();
   }
 
-  private static Honey createHoney() {
+  private  Honey createHoney() {
     Honey forestHoney = new Honey();
     forestHoney.setName("forest honey");
     forestHoney.setTaste("very sweet");
-    Session session = InitSessionFactory.openSession();
+    Session session = sessionFactory.openSession();
     Transaction tx = session.beginTransaction();
     session.save(forestHoney);
     tx.commit();
@@ -73,9 +75,9 @@ public class InitSessionFactoryTest {
     return forestHoney;
   }
 
-  private static void update() {
+  private  void update() {
     Honey honey = createHoney();
-    Session session = InitSessionFactory.openSession();
+    Session session = sessionFactory.openSession();
     Transaction tx = session.beginTransaction();
     honey.setName("Modern style");
     session.update(honey);
@@ -83,17 +85,17 @@ public class InitSessionFactoryTest {
     session.close();
   }
 
-  private static void delete() {
+  private  void delete() {
     Honey honey = createHoney();
-    Session session = InitSessionFactory.openSession();
+    Session session = sessionFactory.openSession();
     Transaction tx = session.beginTransaction();
     session.delete(honey);
     tx.commit();
     session.close();
   }
 
-  private static void clean() {
-    Session session = InitSessionFactory.openSession();
+  private  void clean() {
+    Session session = sessionFactory.openSession();
     Transaction tx = session.beginTransaction();
     session.createQuery("delete from Bee").executeUpdate();
     session.createQuery("delete from Honey").executeUpdate();
@@ -104,8 +106,8 @@ public class InitSessionFactoryTest {
   /**
    * 不用 lombok 生成的 Bee/Honey 的 equals/hashCode 方法，避免死循环
    */
-  private static void createRelation() {
-    Session session = InitSessionFactory.openSession();
+  private  void createRelation() {
+    Session session = sessionFactory.openSession();
     Transaction tx = session.beginTransaction();
     Honey honey = new Honey();
     honey.setName("country honey");
@@ -124,8 +126,8 @@ public class InitSessionFactoryTest {
     session.close();
   }
 
-  private static void query() {
-    Session session = InitSessionFactory.openSession();
+  private  void query() {
+    Session session = sessionFactory.openSession();
     Transaction tx = session.beginTransaction();
     List honeys = session.createQuery("select h from Honey as h").list();
     for (Iterator iter = honeys.iterator(); iter.hasNext(); ) {

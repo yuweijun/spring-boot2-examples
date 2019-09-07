@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +46,8 @@ public class Order {
 
     @ManyToMany
     @JoinTable(name = "t_order_coffee", joinColumns = {@JoinColumn(name = "order_id")})
-    private List<Coffee> coffee;
+    @OrderBy("id DESC")
+    private List<Coffee> coffee = new ArrayList<>();
 
     @Column(updatable = false)
     @Temporal(TemporalType.DATE)
