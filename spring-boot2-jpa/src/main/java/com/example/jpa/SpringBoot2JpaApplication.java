@@ -4,6 +4,7 @@ import com.example.jpa.model.*;
 import com.example.jpa.repository.CoffeeRepository;
 import com.example.jpa.repository.OrderRepository;
 import com.example.jpa.repository.UserRepository;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -12,7 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.util.Arrays;
 import java.util.Date;
 
 @Slf4j
@@ -65,7 +65,7 @@ public class SpringBoot2JpaApplication implements ApplicationRunner {
     Order order1 = Order.builder()
         .user(user)
         .description("desc")
-        .coffee(Arrays.asList(espresso))
+        .coffee(Sets.newHashSet(espresso))
         .createTime(new Date())
         .build();
     orderRepository.save(order1);
@@ -74,7 +74,7 @@ public class SpringBoot2JpaApplication implements ApplicationRunner {
     Order order2 = Order.builder()
         .user(user)
         .createTime(new Date())
-        .coffee(Arrays.asList(espresso, latte))
+        .coffee(Sets.newHashSet(espresso, latte))
         .build();
     orderRepository.save(order2);
 

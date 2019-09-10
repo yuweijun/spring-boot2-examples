@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author Weijun Yu
@@ -41,6 +42,25 @@ public class User {
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date updateTime;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return getId() == user.getId() &&
+        getName().equals(user.getName()) &&
+        getNickName().equals(user.getNickName()) &&
+        getMobile().equals(user.getMobile()) &&
+        getExperience() == user.getExperience() &&
+        getCreateTime().equals(user.getCreateTime()) &&
+        getUpdateTime().equals(user.getUpdateTime());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getNickName(), getMobile(), getExperience(), getCreateTime(), getUpdateTime());
+  }
 }
 
 // package com.example.jpa.model;

@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class
@@ -47,7 +45,7 @@ public class Order {
     @ManyToMany
     @JoinTable(name = "t_order_coffee", joinColumns = {@JoinColumn(name = "order_id")})
     @OrderBy("id DESC")
-    private List<Coffee> coffee = new ArrayList<>();
+    private Set<Coffee> coffee = new HashSet<>();
 
     @Column(updatable = false)
     @Temporal(TemporalType.DATE)
@@ -55,6 +53,23 @@ public class Order {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return getId() == order.getId() &&
+            Objects.equals(getDescription(), order.getDescription()) &&
+            getUser().equals(order.getUser()) &&
+            getCreateTime().equals(order.getCreateTime()) &&
+            getUpdateTime().equals(order.getUpdateTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getDescription(), getUser(), getCreateTime(), getUpdateTime());
+    }
 }
 
 // package com.example.jpa.model;
