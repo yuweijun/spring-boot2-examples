@@ -3,8 +3,8 @@ package com.example.jpa.service;
 import com.example.jpa.model.Coffee;
 import com.example.jpa.repository.CoffeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,7 +16,9 @@ import javax.persistence.criteria.Root;
  * @author yuweijun
  * @since 2019-08-24
  */
-@Service
+// @Service
+// @Named("coffeeService")
+@Named
 public class CoffeeService {
 
     @Autowired
