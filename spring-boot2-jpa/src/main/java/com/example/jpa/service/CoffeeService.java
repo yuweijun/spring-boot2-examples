@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -51,7 +52,15 @@ public class CoffeeService {
         example.ignoreCase();
         example.enableLike(MatchMode.START);
         Session session = entityManager.unwrap(Session.class);
+        @SuppressWarnings("deprecated")
         Criteria criteria = session.createCriteria(Coffee.class).add(example);
         return criteria.list();
+    }
+
+    public List<Coffee> findBySQL(String name) {
+        Query nativeQuery = entityManager.createNativeQuery("select * from t_coffee where name like ?", Coffee.class);
+        // JPA parameter begin from 1 just like as JDBC statement, but Hibernate begin from 0
+        nativeQuery.setParameter(1, name + "%");
+        return nativeQuery.getResultList();
     }
 }

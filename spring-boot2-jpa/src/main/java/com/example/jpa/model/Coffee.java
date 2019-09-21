@@ -12,7 +12,7 @@ import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "t_menu")
+@Table(name = "t_coffee")
 @Builder
 @Data
 @NoArgsConstructor

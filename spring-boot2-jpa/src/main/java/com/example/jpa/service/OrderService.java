@@ -92,7 +92,7 @@ public class OrderService {
    *     from
    *         t_order_coffee coffee0_
    *     inner join
-   *         t_menu coffee1_
+   *         t_coffee coffee1_
    *             on coffee0_.coffee_id=coffee1_.id
    *     where
    *         coffee0_.order_id=?
@@ -126,7 +126,7 @@ public class OrderService {
    * 2019-08-24 12:03:37.166 DEBUG 57545 --- [nio-8080-exec-1] org.hibernate.SQL                        :
    *     insert
    *     into
-   *         t_menu
+   *         t_coffee
    *         (create_time, name, price, update_time, id)
    *     values
    *         (?, ?, ?, ?, ?)
@@ -241,7 +241,7 @@ public class OrderService {
    * 2019-08-24 19:24:48.135 DEBUG 60640 --- [nio-8080-exec-4] org.hibernate.SQL                        :
    *     insert
    *     into
-   *         t_menu
+   *         t_coffee
    *         (create_time, name, price, update_time, id)
    *     values
    *         (?, ?, ?, ?, ?)
@@ -288,7 +288,7 @@ public class OrderService {
    *     from
    *         t_order_coffee coffee0_
    *     inner join
-   *         t_menu coffee1_
+   *         t_coffee coffee1_
    *             on coffee0_.coffee_id=coffee1_.id
    *     where
    *         coffee0_.order_id=?

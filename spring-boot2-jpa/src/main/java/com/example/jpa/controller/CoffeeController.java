@@ -45,4 +45,8 @@ public class CoffeeController {
         return coffeeService.example(name);
     }
 
+    @GetMapping("/find/by/sql")
+    public List<Coffee> findBySQL(String name) {
+        return coffeeService.findBySQL(name);
+    }
 }
