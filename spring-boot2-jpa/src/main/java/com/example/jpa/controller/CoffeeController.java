@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author yuweijun
  * @since 2019-08-23
@@ -36,6 +38,11 @@ public class CoffeeController {
     @GetMapping("/find/by/name")
     public Coffee findByName(String name) {
         return coffeeService.findByName(name);
+    }
+
+    @GetMapping("/find/by/example")
+    public List<Coffee> example(String name) {
+        return coffeeService.example(name);
     }
 
 }

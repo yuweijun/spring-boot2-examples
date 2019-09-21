@@ -2,6 +2,10 @@ package com.example.jpa.service;
 
 import com.example.jpa.model.Coffee;
 import com.example.jpa.repository.CoffeeRepository;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Named;
@@ -10,6 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 
 /**
@@ -37,5 +42,16 @@ public class CoffeeService {
 
         TypedQuery<Coffee> typedQuery = entityManager.createQuery(criteria);
         return typedQuery.getSingleResult();
+    }
+
+    public List<Coffee> example(String name) {
+        Coffee coffee = new Coffee();
+        coffee.setName(name);
+        Example example = Example.create(coffee);
+        example.ignoreCase();
+        example.enableLike(MatchMode.START);
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Coffee.class).add(example);
+        return criteria.list();
     }
 }
