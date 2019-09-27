@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -31,12 +33,21 @@ public class OrderController {
   @Autowired
   private OrderService orderService;
 
+  /**
+   * 用一个名字有岐义的来测试一下 bean 的装配查找
+   *
+   * 这里用 {@link org.springframework.beans.factory.annotation.Qualifier} 也可以
+   */
+  @Inject
+  @Named("orderService2")
+  private OrderService orderService3;
+
   @Autowired
   private EntityManager entityManager;
 
   @GetMapping("/")
   public Iterable<Order> list() {
-    List<Order> all = orderService.findAll();
+    List<Order> all = orderService3.findAll();
     Order order = all.get(0);
 
     User user = order.getUser();
