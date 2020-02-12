@@ -34,6 +34,7 @@
         <module>spring-boot2-jwt-auth-server</module>
         <module>spring-boot2-jwt-resource-service</module>
         <module>spring-boot2-jpa</module>
+        <module>spring-boot2-karate</module>
     </modules>
 
     <build>
