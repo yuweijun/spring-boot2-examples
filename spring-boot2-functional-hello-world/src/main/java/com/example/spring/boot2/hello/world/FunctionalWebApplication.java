@@ -3,6 +3,7 @@ package com.example.spring.boot2.hello.world;
 
 import org.apache.catalina.LifecycleException;
 import org.springframework.boot.web.embedded.netty.NettyWebServer;
+import org.springframework.boot.web.server.Shutdown;
 import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
 import org.springframework.web.reactive.function.server.HandlerFunction;
@@ -55,7 +56,7 @@ public class FunctionalWebApplication {
         // System.in.read();
 
         // 启动方式二服务使用
-        NettyWebServer webServer = new NettyWebServer(httpServer, handlerAdapter, Duration.ofSeconds(1L));
+        NettyWebServer webServer = new NettyWebServer(httpServer, handlerAdapter, Duration.ofSeconds(1L), Shutdown.GRACEFUL);
         webServer.start();
 
         // 启动方式三tomcat

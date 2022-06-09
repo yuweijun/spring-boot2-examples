@@ -7,7 +7,7 @@
 1. JwtTokenAuthApplication
 2. JwtResourceApplication
 
-## Access
+## Access resource based same jwt token and cookie
 
 1. http://localhost:8010/login?redirect=http://localhost:8020
 2. input username and password: admin/admin

@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  connection-timeout: 12000
+  tomcat:
+    threads:
+      max: 500
+      min-spare: 50
+    accept-count: 300
+    max-connections: 1000
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:mysql}
+  devtools:
+    restart:
+      enabled: false
+
+management:
+  health:
+    db:
+      enabled: false
+  server:
+    port: 8055
+  endpoints:
+    web:
+      base-path: /manage
+      exposure:
+        include: health,info,metrics,env
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+      cache:
+        time-to-live: 60s
+      group:
+        liveness:
+          include: ping
+          show-details: always
+        readiness:
+          include: '*'
+          show-details: always
+  metrics:
+    enabled: true
+    binders:
+      jvm:
+        enabled: true
+      jdbc:
+        enabled: true
+
+logging:
+  level:
+    root: info
+    org.springframework.jdbc.core.JdbcTemplate: debug

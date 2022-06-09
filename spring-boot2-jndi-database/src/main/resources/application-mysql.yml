@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    enabled: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    # not work for localhost or 127.0.0.1
+    # url: jdbc:mysql://127.0.0.1/jdbc?allowPublicKeyRetrieval=true&verifyServerCertificate=false&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://192.168.31.82/jdbc?allowPublicKeyRetrieval=true&verifyServerCertificate=false&characterEncoding=utf8&useSSL=false
+    username: dbuser
+    password: dbpass

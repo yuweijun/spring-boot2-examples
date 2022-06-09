@@ -1,5 +1,6 @@
 package com.example.jwt;
 
+import io.jsonwebtoken.Jwts;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -17,7 +18,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String username = JwtUtil.getSubject(httpServletRequest, JWT_TOKEN_COOKIE_NAME, SIGNING_KEY);
+        String username = getSubject(httpServletRequest, JWT_TOKEN_COOKIE_NAME, SIGNING_KEY);
         if (username == null) {
             String authService = this.getFilterConfig().getInitParameter("services.auth");
             httpServletResponse.sendRedirect(authService + "?redirect=" + httpServletRequest.getRequestURL());
@@ -25,5 +26,11 @@ public class JwtFilter extends OncePerRequestFilter {
             httpServletRequest.setAttribute("username", username);
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         }
+    }
+
+    String getSubject(HttpServletRequest httpServletRequest, String jwtTokenCookieName, String signingKey){
+        String token = CookieUtil.getValue(httpServletRequest, jwtTokenCookieName);
+        if(token == null) return null;
+        return Jwts.parser().setSigningKey(signingKey).parseClaimsJws(token).getBody().getSubject();
     }
 }

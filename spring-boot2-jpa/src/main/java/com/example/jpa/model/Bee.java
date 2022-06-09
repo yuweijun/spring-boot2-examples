@@ -20,7 +20,7 @@ public class Bee implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bee_gen")
-  @SequenceGenerator(name = "bee_gen", sequenceName = "bee_id_seq")
+  @SequenceGenerator(name = "bee_gen", sequenceName = "bee_id_seq", allocationSize = 1)
   private Integer id;
 
   @NonNull

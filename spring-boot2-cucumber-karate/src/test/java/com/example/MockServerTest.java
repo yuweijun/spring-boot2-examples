@@ -40,7 +40,7 @@ public class MockServerTest {
 
   @Before
   public void startMockServer() {
-    mockServer = startClientAndServer(8080);
+    mockServer = startClientAndServer(8989);
 
     mockServer.when(request()
         .withPath("/hello/world")
@@ -66,7 +66,7 @@ public class MockServerTest {
     boolean running = mockServer.isRunning();
     System.out.println(running);
 
-    HttpGet httpGet = new HttpGet("http://localhost:8080/hello/world");
+    HttpGet httpGet = new HttpGet("http://localhost:8989/hello/world");
     try (
         CloseableHttpClient client = HttpClients.createDefault();
         CloseableHttpResponse response = client.execute(httpGet);
@@ -80,7 +80,7 @@ public class MockServerTest {
     ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
     nameValuePairs.add(new BasicNameValuePair("username", "foo"));
     nameValuePairs.add(new BasicNameValuePair("password", "123456"));
-    HttpPost httpPost = new HttpPost("http://localhost:8080/hello/world");
+    HttpPost httpPost = new HttpPost("http://localhost:8989/hello/world");
     httpPost.addHeader("Accept", "text/plain");
     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
     try (
